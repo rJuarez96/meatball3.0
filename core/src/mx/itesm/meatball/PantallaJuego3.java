@@ -69,7 +69,7 @@ public class PantallaJuego3 implements Screen {
     private Boton btnSig;
     private Texture texturaSMu;
     private Texture texturaMu;
-    public int puntaje;
+    private int puntaje;
 
     private Boton btnMusica;
     private Boton btnSMusica;
@@ -78,17 +78,19 @@ public class PantallaJuego3 implements Screen {
     // Estados del juego
     private EstadosJuego estadoJuego;
 
-    public PantallaJuego3(Principal principal) {
+
+    public PantallaJuego3(Principal principal, int puntajelvl) {
 
         this.principal=principal;
 
+        this.puntaje=puntajelvl;
         //marcador=0;
 
     }
     @Override
     public void show() {
         //se ejecuta uando se muestra
-        puntaje=0;
+
         camara = new OrthographicCamera(principal.anchoMundo, principal.altoMundo);
         camara.position.set(principal.anchoMundo / 2, principal.altoMundo / 2, 0);
         camara.update();
@@ -382,7 +384,7 @@ public class PantallaJuego3 implements Screen {
             for(int i=0;i<5;i++){
                 for (int j=0;j<5;j++){
                     if (capaMala.getCell(celdaX+i, celdaY+j)!=null){
-                        capaMala.setCell(celdaX+i, celdaY+j, null);
+                        capaMala.setCell(celdaX + i, celdaY + j, null);
                         albondiga.perderVida();
                         if (puntaje>0) {
 
@@ -543,7 +545,7 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             }
             if (estadoJuego==EstadosJuego.GANO){
                 if (btnSig.contiene(x,y)){
-                    principal.setScreen(new PantallaJuego4(principal));
+                    principal.setScreen(new PantallaJuego4(principal,puntaje));
                 }
 
             }

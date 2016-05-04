@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class Personaje {
     public static final float VELOCIDAD_Y = -10f;   // Velocidad de caída
-    private static  float VELOCIDAD_X = 15;     // Velocidad horizontal
+    private static  float VELOCIDAD_X = 5;     // Velocidad horizontal
 
     private Sprite sprite;  // Sprite cuando no se mueve
     private Texture texturaAlbondiga;

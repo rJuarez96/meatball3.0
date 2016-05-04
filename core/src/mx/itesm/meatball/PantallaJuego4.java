@@ -98,11 +98,13 @@ public class PantallaJuego4 implements Screen {
     private Texture texturaMu;
     private Boton btnMusica;
     private Boton btnSMusica;
+    private int puntajelvl;
 
 
-    public PantallaJuego4(Principal principal) {
+    public PantallaJuego4(Principal principal,int puntaje) {
 
         this.principal=principal;
+        this.puntajelvl=puntaje;
 
         //marcador=0;
 
@@ -729,7 +731,7 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             }
             if (estadoJuego==EstadosJuego.GANO){
                 if (btnSig.contiene(x,y)){
-                    principal.setScreen(new PantallaJuego5(principal));
+                    principal.setScreen(new PantallaJuego5(principal,puntajelvl));
                 }
 
             }

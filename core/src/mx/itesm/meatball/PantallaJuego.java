@@ -384,7 +384,7 @@ public class PantallaJuego implements Screen {
             for(int i=0;i<5;i++){
                 for (int j=0;j<5;j++){
                     if (capaMala.getCell(celdaX+i, celdaY+j)!=null){
-                        capaMala.setCell(celdaX+i, celdaY+j, null);
+                        capaMala.setCell(celdaX + i, celdaY + j, null);
                         albondiga.perderVida();
                         if (puntaje>=0) {
 
@@ -539,13 +539,13 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             }
             if (estadoJuego==EstadosJuego.PERDIO){
                 if (btnOtra.contiene(x,y)){
-                    principal.setScreen(new PantallaJuego(principal));
+                    principal.setScreen(new pantallaMenu(principal));
                 }
 
             }
             if (estadoJuego==EstadosJuego.GANO){
                 if (btnSig.contiene(x,y)){
-                    principal.setScreen(new PantallaJuego2(principal));
+                    principal.setScreen(new PantallaJuego2(principal,puntaje));
                 }
 
             }

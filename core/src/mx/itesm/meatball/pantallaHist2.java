@@ -75,7 +75,7 @@ public class pantallaHist2 implements Screen {
             float touchY=coordenadas.y;
 
             if (touchX>=spriteBtnNext.getX() && touchX<=spriteBtnNext.getX()+spriteBtnNext.getWidth() && touchY>=spriteBtnNext.getY() && touchY<=spriteBtnNext.getY()+spriteBtnNext.getHeight()){
-                principal.setScreen(new PantallaJuego3(principal));
+                principal.setScreen(new pantallaMenu(principal));
 
 
             }

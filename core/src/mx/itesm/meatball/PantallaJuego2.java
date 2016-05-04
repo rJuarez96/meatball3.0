@@ -93,7 +93,7 @@ public class PantallaJuego2 implements Screen {
     private Array<Integer> lugaresY;
     // Estados del juego
     private EstadosJuego estadoJuego;
-    public int puntaje;
+    public int puntajelvl;
 
     private Texture texturaSMu;
     private Texture texturaMu;
@@ -102,9 +102,10 @@ public class PantallaJuego2 implements Screen {
 
 
 
-    public PantallaJuego2(Principal principal) {
+    public PantallaJuego2(Principal principal, int puntaje) {
 
         this.principal=principal;
+       this.puntajelvl=puntaje;
 
 
         //marcador=0;
@@ -113,6 +114,7 @@ public class PantallaJuego2 implements Screen {
     @Override
     public void show() {
         //se ejecuta uando se muestra
+
         ataquesKi= new Array<Ataque>(9);
         ataquesAl=new Array<Ataque>(20);
         lugaresX=new Array<Integer>(5);
@@ -723,7 +725,7 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             }
             if (estadoJuego==EstadosJuego.GANO){
                 if (btnSig.contiene(x,y)){
-                    principal.setScreen(new PantallaJuego3(principal));
+                    principal.setScreen(new PantallaJuego3(principal,puntajelvl));
                 }
 
             }

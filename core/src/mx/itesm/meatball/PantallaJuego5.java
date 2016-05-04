@@ -69,7 +69,7 @@ public class PantallaJuego5 implements Screen {
     private Boton btnSig;
     private Texture texturaSMu;
     private Texture texturaMu;
-    public int puntaje;
+
 
     private Boton btnMusica;
     private Boton btnSMusica;
@@ -77,10 +77,12 @@ public class PantallaJuego5 implements Screen {
 
     // Estados del juego
     private EstadosJuego estadoJuego;
+    private int puntaje;
 
-    public PantallaJuego5(Principal principal) {
+    public PantallaJuego5(Principal principal,int puntajelvl) {
 
         this.principal=principal;
+        this.puntaje=puntajelvl;
 
         //marcador=0;
 
@@ -88,7 +90,7 @@ public class PantallaJuego5 implements Screen {
     @Override
     public void show() {
         //se ejecuta uando se muestra
-        puntaje=0;
+
         camara = new OrthographicCamera(principal.anchoMundo, principal.altoMundo);
         camara.position.set(principal.anchoMundo / 2, principal.altoMundo / 2, 0);
         camara.update();

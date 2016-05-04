@@ -384,7 +384,7 @@ public class PantallaJuego2 implements Screen {
                 batch.begin();
                 perdioO.draw(batch);
                 btnOtra.render(batch);
-                btnOtra.setPosicion(1000,100);
+                btnOtra.setPosicion(1000, 100);
                 batch.end();
                 //camara.position.set(0,0, 0);
 
@@ -729,7 +729,7 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             }
             if (estadoJuego==EstadosJuego.PERDIO){
                 if (btnOtra.contiene(x,y)){
-                    principal.setScreen(new PantallaJuego(principal));
+                    principal.setScreen(new pantallaMenu(principal));
                 }
 
             }

@@ -169,7 +169,7 @@ public class PantallaJuego implements Screen {
         texturaPersonaje = assetManager.get("PugCorrer" +
                 ".png");
         // Crear el personaje
-        albondiga = new Personaje(texturaPersonaje,1,1);
+        albondiga = new Personaje(texturaPersonaje,3,1);
         // Posición inicial del personaje
         albondiga.getSprite().setPosition(0, 200);
 

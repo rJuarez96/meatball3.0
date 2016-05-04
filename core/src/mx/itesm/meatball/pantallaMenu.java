@@ -117,7 +117,7 @@ public class pantallaMenu implements Screen {
                 //toco play?
             if (touchX>=spriteTexturaPlay.getX() && touchX<=spriteTexturaPlay.getX()+spriteTexturaPlay.getWidth() && touchY>=spriteTexturaPlay.getY() && touchY<=spriteTexturaPlay.getY()+spriteTexturaPlay.getHeight()){
                 musicaFondo.stop();
-                principal.setScreen(new PantallaJuego6(principal));
+                principal.setScreen(new pantallaHist1(principal));
 
             }
             if (touchX>=spriteAcercaDe.getX() && touchX<=spriteAcercaDe.getX()+spriteAcercaDe.getWidth() && touchY>=spriteAcercaDe.getY() && touchY<=spriteAcercaDe.getY()+spriteAcercaDe.getHeight()){

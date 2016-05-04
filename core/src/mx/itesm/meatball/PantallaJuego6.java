@@ -99,6 +99,8 @@ public class PantallaJuego6 implements Screen {
     private Boton btnMusica;
     private Boton btnSMusica;
 
+    private Texture perdio2;
+    private Sprite perdioO;
 
     public PantallaJuego6(Principal principal) {
 
@@ -164,6 +166,7 @@ public class PantallaJuego6 implements Screen {
         assetManager.load("botonRegresar.png",Texture.class);
         assetManager.load("Musica.png",Texture.class);
         assetManager.load("SMusica.png",Texture.class);
+        assetManager.load("fin.jpg",Texture.class);
         // Se bloquea hasta que cargue todos los recursos
         assetManager.finishLoading();
 
@@ -235,7 +238,7 @@ public class PantallaJuego6 implements Screen {
         btnIzq=new Boton(texturaBtnIzq);
         btnIzq.setAlfa(0.7f);
         btnDer.setAlfa(0.7f);
-        btnDer.setPosicion(TAM_CELDA*7,0);
+        btnDer.setPosicion(TAM_CELDA * 7, 0);
 
 
         texturaSMu=assetManager.get("SMusica.png");
@@ -245,6 +248,8 @@ public class PantallaJuego6 implements Screen {
         btnMusica.setPosicion(540, 400);
         btnSMusica.setPosicion(740,400);
 
+        perdio2=assetManager.get("fin.jpg");
+        perdioO= new Sprite(perdio2);
 
     }
 
@@ -284,11 +289,11 @@ public class PantallaJuego6 implements Screen {
 
                 albondiga.render(batch);
                 Kitty.render(batch);
-                if(i>2){
+                if(i>1){
                     Kitty.saltar();
                     i=0;
                 }
-                if (j>6){
+                if (j>3){
                     //ataques=Kitty.atacar();
                     Ataque att=new Ataque(texturaFondo,Kitty.getX(),Kitty.getY(),-5,3);
                     ataquesKi.add(att);
@@ -363,8 +368,9 @@ public class PantallaJuego6 implements Screen {
                 //principal.setScreen(new pantallaMenu(principal));
                 batch.begin();
                 //Gdx.app.log("perdio","regresando");
-                spritePerdio.draw(batch);
+                perdioO.draw(batch);
                 btnOtra.render(batch);
+                btnOtra.setPosicion(1000, 100);
                 batch.end();
                 //camara.position.set(0,0, 0);
 
@@ -671,6 +677,7 @@ public class PantallaJuego6 implements Screen {
         assetManager.unload("Regresar2.png");
         assetManager.unload("botonRegresar.png");
         musicaFondo.dispose();
+       // btnOtra=null;
         albondiga=null;
         Kitty=null;
         mapa=null;

@@ -73,6 +73,9 @@ public class PantallaJuego implements Screen {
     private Texture texturaMu;
     public int puntaje;
 
+    private Texture perdio2;
+    private Sprite perdioO;
+
     private Boton btnMusica;
     private Boton btnSMusica;
     //private  int Nivel;
@@ -141,6 +144,8 @@ public class PantallaJuego implements Screen {
         assetManager.load("Musica.png",Texture.class);
         assetManager.load("Fondo_1.jpg",Texture.class);
 
+        assetManager.load("fin.jpg",Texture.class);
+
 
 
         // Se bloquea hasta que cargue todos los recursos
@@ -164,7 +169,7 @@ public class PantallaJuego implements Screen {
         texturaPersonaje = assetManager.get("PugCorrer" +
                 ".png");
         // Crear el personaje
-        albondiga = new Personaje(texturaPersonaje,3,1);
+        albondiga = new Personaje(texturaPersonaje,1,1);
         // Posición inicial del personaje
         albondiga.getSprite().setPosition(0, 200);
 
@@ -203,6 +208,9 @@ public class PantallaJuego implements Screen {
         btnSMusica=new Boton(texturaSMu);
         btnMusica.setPosicion(540,400);
         btnSMusica.setPosicion(740,400);
+
+        perdio2=assetManager.get("fin.jpg");
+        perdioO= new Sprite(perdio2);
 
 
 
@@ -283,8 +291,9 @@ public class PantallaJuego implements Screen {
                 //principal.setScreen(new pantallaMenu(principal));
                 batch.begin();
                 //Gdx.app.log("perdio","regresando");
-                spritePerdio.draw(batch);
+                perdioO.draw(batch);
                 btnOtra.render(batch);
+                btnOtra.setPosicion(1000,100);
                 batch.end();
                 //camara.position.set(0,0, 0);
 
@@ -507,6 +516,7 @@ public class PantallaJuego implements Screen {
         assetManager.unload("Regresar2.png");
         assetManager.unload("botonsiguiente.png");
         assetManager.unload("botonRegresar.png");
+        //btnOtra=null;
         albondiga=null;
         mapa=null;
         musicaFondo.dispose();

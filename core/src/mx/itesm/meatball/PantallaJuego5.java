@@ -79,6 +79,10 @@ public class PantallaJuego5 implements Screen {
     private EstadosJuego estadoJuego;
     private int puntaje;
 
+
+    private Texture perdio2;
+    private Sprite perdioO;
+
     public PantallaJuego5(Principal principal,int puntajelvl) {
 
         this.principal=principal;
@@ -139,6 +143,7 @@ public class PantallaJuego5 implements Screen {
         assetManager.load("SMusica.png",Texture.class);
         assetManager.load("Musica.png",Texture.class);
         assetManager.load("Fondo_3.jpg",Texture.class);
+        assetManager.load("fin.jpg",Texture.class);
 
 
 
@@ -210,6 +215,9 @@ public class PantallaJuego5 implements Screen {
         btnSig=new Boton(texturaSiguiente);
         btnSig.setPosicion(1000,100);
 
+        perdio2=assetManager.get("fin.jpg");
+        perdioO= new Sprite(perdio2);
+
 
 
 
@@ -280,8 +288,9 @@ public class PantallaJuego5 implements Screen {
                 //principal.setScreen(new pantallaMenu(principal));
                 batch.begin();
                 //Gdx.app.log("perdio","regresando");
-                spritePerdio.draw(batch);
+                perdioO.draw(batch);
                 btnOtra.render(batch);
+                btnOtra.setPosicion(1000,100);
                 batch.end();
                 //camara.position.set(0,0, 0);
 
@@ -504,6 +513,7 @@ public class PantallaJuego5 implements Screen {
         assetManager.unload("Regresar2.png");
         assetManager.unload("botonsiguiente.png");
         assetManager.unload("botonRegresar.png");
+        //btnOtra=null;
         albondiga=null;
         mapa=null;
         musicaFondo.dispose();

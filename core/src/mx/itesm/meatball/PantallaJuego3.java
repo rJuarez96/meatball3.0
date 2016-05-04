@@ -78,6 +78,9 @@ public class PantallaJuego3 implements Screen {
     // Estados del juego
     private EstadosJuego estadoJuego;
 
+    private Texture perdio2;
+    private Sprite perdioO;
+
 
     public PantallaJuego3(Principal principal, int puntajelvl) {
 
@@ -134,7 +137,7 @@ public class PantallaJuego3 implements Screen {
         assetManager.load("MrKitty copia.png",Texture.class);
         assetManager.load("botonsiguiente.png",Texture.class);
         assetManager.load("botonRegresar.png",Texture.class);
-
+        assetManager.load("fin.jpg",Texture.class);
 
         assetManager.load("SMusica.png",Texture.class);
         assetManager.load("Musica.png",Texture.class);
@@ -205,11 +208,15 @@ public class PantallaJuego3 implements Screen {
         btnSMusica.setPosicion(740,400);
 
 
-
+        perdio2=assetManager.get("fin.jpg");
+        perdioO= new Sprite(perdio2);
 
         texturaSiguiente=assetManager.get("botonsiguiente.png");
         btnSig=new Boton(texturaSiguiente);
         btnSig.setPosicion(1000,100);
+
+
+
 
 
 
@@ -280,8 +287,9 @@ public class PantallaJuego3 implements Screen {
                 //principal.setScreen(new pantallaMenu(principal));
                 batch.begin();
                 //Gdx.app.log("perdio","regresando");
-                spritePerdio.draw(batch);
+                perdioO.draw(batch);
                 btnOtra.render(batch);
+                btnOtra.setPosicion(1000,100);
                 batch.end();
                 //camara.position.set(0,0, 0);
 
@@ -504,6 +512,7 @@ public class PantallaJuego3 implements Screen {
         assetManager.unload("Regresar2.png");
         assetManager.unload("botonsiguiente.png");
         assetManager.unload("botonRegresar.png");
+        //btnOtra=null;
         albondiga=null;
         mapa=null;
         musicaFondo.dispose();

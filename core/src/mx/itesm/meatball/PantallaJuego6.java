@@ -148,7 +148,7 @@ public class PantallaJuego6 implements Screen {
         assetManager.load("PugSalto.png", Texture.class);
         //assetManager.load("spriter.png", Texture.class);
         assetManager.load("salto.png", Texture.class);
-        assetManager.load("fin.jpg", Texture.class);
+        assetManager.load("his6.jpg", Texture.class);
         assetManager.load("botonPausa.png", Texture.class);
         assetManager.load("mira mama sin botones.png",Texture.class);
         assetManager.load("Regresar2.png", Texture.class);
@@ -209,7 +209,7 @@ public class PantallaJuego6 implements Screen {
         pausaBtn=new Boton(texturaBtnPausa);
         //pausaBtn.setPosicion(40 * TAM_CELDA, 15 * TAM_CELDA);
         pausaBtn.setAlfa(0.7f);
-        texturaPerdio=assetManager.get("fin.jpg");
+        texturaPerdio=assetManager.get("his6.jpg");
         spritePerdio= new Sprite(texturaPerdio);
         spritePerdio.setPosition(0, 0);
         texturaPausa=assetManager.get("mira mama sin botones.png");
@@ -665,7 +665,7 @@ public class PantallaJuego6 implements Screen {
         assetManager.unload("spriteChef.png");
         // assetManager.unload("spriteRun.png");
         assetManager.unload("salto.png");
-        assetManager.unload("fin.jpg");
+        assetManager.unload("his6.jpg");
         // assetManager.unload("botonAjustes.png");
         assetManager.unload("mira mama sin botones.png");
         assetManager.unload("Regresar2.png");

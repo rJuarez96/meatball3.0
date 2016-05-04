@@ -41,7 +41,7 @@ public class pantalaIns2 implements Screen {
         spriteBtnSalir.setPosition(0,100);
         texturaBtnNext=new Texture(Gdx.files.internal("botonsiguiente.png"));
         spriteBtnNext=new Sprite(texturaBtnNext);
-        spriteBtnNext.setPosition(1000, 100);
+        spriteBtnNext.setPosition(800, 50);
       //  spriteBtnNext.setSize(100, 50);
 
     }

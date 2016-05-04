@@ -12,9 +12,9 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
- * Created by Roberto on 02/05/2016.
+ * Created by Roberto on 04/05/2016.
  */
-public class pantallaHist2 implements Screen {
+public class pantallaHist3 implements Screen {
     private final Principal principal;
     private OrthographicCamera camara;
     private Viewport vista;
@@ -26,12 +26,12 @@ public class pantallaHist2 implements Screen {
     private Sprite spriteBtnSalir;
     private Texture texturaBtnNext;
     private Sprite spriteBtnNext;
-    public pantallaHist2(Principal principal) {
+    public pantallaHist3(Principal principal) {
         this.principal=principal;
     }
     private void cargaTexturasSprites() {
 
-        texturaFondo=new Texture(Gdx.files.internal("his2.jpg"));
+        texturaFondo=new Texture(Gdx.files.internal("his3.jpg"));
         spriteFondo=new Sprite(texturaFondo);
 
         texturaBtnNext=new Texture(Gdx.files.internal("botonsiguiente.png"));
@@ -75,7 +75,7 @@ public class pantallaHist2 implements Screen {
             float touchY=coordenadas.y;
 
             if (touchX>=spriteBtnNext.getX() && touchX<=spriteBtnNext.getX()+spriteBtnNext.getWidth() && touchY>=spriteBtnNext.getY() && touchY<=spriteBtnNext.getY()+spriteBtnNext.getHeight()){
-                principal.setScreen(new pantallaHist3(principal));
+                principal.setScreen(new pantallaIns(principal,0));
 
 
             }

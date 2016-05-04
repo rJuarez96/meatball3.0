@@ -153,7 +153,7 @@ public class PantallaJuego2 implements Screen {
         assetManager.load("PugSalto.png", Texture.class);
         //assetManager.load("spriter.png", Texture.class);
         assetManager.load("salto.png", Texture.class);
-        assetManager.load("fin.jpg", Texture.class);
+        assetManager.load("IMG cargando2.jpg", Texture.class);
         assetManager.load("botonPausa.png", Texture.class);
         assetManager.load("mira mama sin botones.png",Texture.class);
         assetManager.load("Regresar2.png", Texture.class);
@@ -214,7 +214,7 @@ public class PantallaJuego2 implements Screen {
         pausaBtn=new Boton(texturaBtnPausa);
         //pausaBtn.setPosicion(40 * TAM_CELDA, 15 * TAM_CELDA);
         pausaBtn.setAlfa(0.7f);
-        texturaPerdio=assetManager.get("fin.jpg");
+        texturaPerdio=assetManager.get("IMG cargando2.jpg");
         spritePerdio= new Sprite(texturaPerdio);
         spritePerdio.setPosition(0, 0);
         texturaPausa=assetManager.get("mira mama sin botones.png");
@@ -659,7 +659,7 @@ public class PantallaJuego2 implements Screen {
         assetManager.unload("spriteKitty.png");
        // assetManager.unload("spriteRun.png");
         assetManager.unload("salto.png");
-        assetManager.unload("fin.jpg");
+        assetManager.unload("IMG cargando2.jpg");
        // assetManager.unload("botonAjustes.png");
         assetManager.unload("mira mama sin botones.png");
         assetManager.unload("Regresar2.png");
@@ -725,6 +725,7 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             }
             if (estadoJuego==EstadosJuego.GANO){
                 if (btnSig.contiene(x,y)){
+                    albondiga.cambiarVelDer();
                     principal.setScreen(new PantallaJuego3(principal,puntajelvl));
                 }
 

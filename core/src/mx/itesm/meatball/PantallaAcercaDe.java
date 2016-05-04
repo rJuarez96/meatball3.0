@@ -32,7 +32,7 @@ public class PantallaAcercaDe implements Screen {
 }
     private void cargaTexturasSprites() {
 
-        texturaFondo=new Texture(Gdx.files.internal("acerca de pantalla.png"));
+        texturaFondo=new Texture(Gdx.files.internal("acerca de pantalla.jpg"));
         spriteFondo=new Sprite(texturaFondo);
         texturaBtnSalir=new Texture(Gdx.files.internal("botonRegresar.png"));
         spriteBtnSalir=new Sprite(texturaBtnSalir);

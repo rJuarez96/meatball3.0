@@ -30,7 +30,7 @@ public class pantallaHist1 implements Screen {
     }
     private void cargaTexturasSprites() {
 
-        texturaFondo=new Texture(Gdx.files.internal("perdioP.png"));
+        texturaFondo=new Texture(Gdx.files.internal("his1.jpg"));
         spriteFondo=new Sprite(texturaFondo);
 
         texturaBtnNext=new Texture(Gdx.files.internal("botonsiguiente.png"));
@@ -74,7 +74,7 @@ public class pantallaHist1 implements Screen {
             float touchY=coordenadas.y;
 
             if (touchX>=spriteBtnNext.getX() && touchX<=spriteBtnNext.getX()+spriteBtnNext.getWidth() && touchY>=spriteBtnNext.getY() && touchY<=spriteBtnNext.getY()+spriteBtnNext.getHeight()){
-                principal.setScreen(new pantallaIns(principal, 0));
+                principal.setScreen(new pantallaHist2(principal));
 
 
             }

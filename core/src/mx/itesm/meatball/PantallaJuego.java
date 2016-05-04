@@ -126,7 +126,7 @@ public class PantallaJuego implements Screen {
         //assetManager.load("PugSalto.png", Texture.class);
         assetManager.load("PugCorrer.png", Texture.class);
         assetManager.load("salto.png", Texture.class);
-        assetManager.load("fin.jpg", Texture.class);
+        assetManager.load("his5.jpg", Texture.class);
         assetManager.load("botonPausa.png", Texture.class);
         assetManager.load("mira mama sin botones.png",Texture.class);
         assetManager.load("Regresar2.png", Texture.class);
@@ -138,6 +138,8 @@ public class PantallaJuego implements Screen {
 
         assetManager.load("SMusica.png",Texture.class);
         assetManager.load("Musica.png",Texture.class);
+        assetManager.load("Musica.png",Texture.class);
+        assetManager.load("Fondo_1.jpg",Texture.class);
 
 
 
@@ -175,10 +177,12 @@ public class PantallaJuego implements Screen {
 
         btnSalto.setSize((int) btnSalto.getWidth() / 2, (int) btnSalto.getHeight() / 2);
         texturaBtnPausa=assetManager.get("botonPausa.png");
+        texturaFondo=assetManager.get("Fondo_1.jpg");
+        spriteFondo=new Sprite(texturaFondo);
         pausaBtn=new Boton(texturaBtnPausa);
         pausaBtn.setPosicion(camara.position.x + 320, 18 * TAM_CELDA);
         pausaBtn.setAlfa(0.7f);
-        texturaPerdio=assetManager.get("fin.jpg");
+        texturaPerdio=assetManager.get("his5.jpg");
         spritePerdio= new Sprite(texturaPerdio);
         spritePerdio.setPosition(0, 0);
         texturaPausa=assetManager.get("mira mama sin botones.png");
@@ -227,6 +231,7 @@ public class PantallaJuego implements Screen {
         //Gdx.app.log("render","estado= "+Nivel);
         switch (estadoJuego) {
             case JUGANDO:
+
             moverPersonaje();
                 borrarPantalla();
                 actualizarCamara(); // Mover la cámara para que siga al personaje
@@ -236,17 +241,28 @@ public class PantallaJuego implements Screen {
 
             batch.setProjectionMatrix(camara.combined);
 
-            rendererMapa.setView(camara);
-            rendererMapa.render();  // Dibuja el mapa
+              // Dibuja el mapa
             // Entre begin-end dibujamos nuestros objetos en pantalla
             batch.begin();
 
-            albondiga.render(batch);
+
+                for (int ok=0;ok<10;ok++){
+
+                    spriteFondo.draw(batch);
+                    spriteFondo.setPosition(ok*1280,0);
+                }
+
                // Dibuja el personaje
                 //spritePerdio.draw(batch);
 
 
             batch.end();
+                rendererMapa.setView(camara);
+                rendererMapa.render();
+
+                batch.begin();
+                albondiga.render(batch);
+                batch.end();
 
             // Dibuja el HUD
             batch.setProjectionMatrix(camaraHUD.combined);
@@ -485,7 +501,7 @@ public class PantallaJuego implements Screen {
         assetManager.unload("botonPausa.png");
        // assetManager.unload("PugCorrer.png");
         assetManager.unload("salto.png");
-        assetManager.unload("fin.jpg");
+        assetManager.unload("his5.jpg");
        // assetManager.unload("botonAjustes.png");
         assetManager.unload("mira mama sin botones.png");
         assetManager.unload("Regresar2.png");

@@ -737,7 +737,7 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             if (estadoJuego==EstadosJuego.GANO){
                 if (btnSig.contiene(x,y)){
                     principal.setScreen(new pantallaMenu(principal));
-                    Gdx.app.log("kjk","ded");
+                   // Gdx.app.log("kjk","ded");
                 }
 
             }

@@ -733,7 +733,7 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             }
             if (estadoJuego==EstadosJuego.PERDIO){
                 if (btnOtra.contiene(x,y)){
-                    principal.setScreen(new PantallaJuego(principal));
+                    principal.setScreen(new pantallaMenu(principal));
                 }
 
             }

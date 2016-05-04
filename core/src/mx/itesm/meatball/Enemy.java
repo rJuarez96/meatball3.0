@@ -37,35 +37,81 @@ public class Enemy {
     private int tipo;
     private int vidas;
     private Texture ata;
+    private int i;
 
     /*
     Constructor del personaje, recibe una imagen con varios frames, (ver imagen marioSprite.png)
      */
-    public Enemy(Texture textura, int vidas) {
+    public Enemy(Texture textura, int vidas, int i) {
         //ata= new Texture(Gdx.files.internal("monedas.png"));
         // Lee la textura como región
-        TextureRegion texturaCompleta = new TextureRegion(textura);
-        // La divide en frames de 16x32 (ver marioSprite.png)
-        TextureRegion[][] texturaPersonaje = texturaCompleta.split(650,300);
-        // Crea la animación con tiempo de 0.25 segundos entre frames.
-        animacion = new Animation(0.25f,
-                texturaPersonaje[0][11],
-                texturaPersonaje[0][10],
-                texturaPersonaje[0][9],
-                texturaPersonaje[0][8],
-                texturaPersonaje[0][7],
-                texturaPersonaje[0][6],
-                texturaPersonaje[0][5],
-                texturaPersonaje[0][4],
-                texturaPersonaje[0][3],
-                texturaPersonaje[0][2],
-                texturaPersonaje[0][1]);
-        // Animación infinita
-        animacion.setPlayMode(Animation.PlayMode.LOOP);
-        // Inicia el timer que contará tiempo para saber qué frame se dibuja
-        timerAnimacion = 0;
-        // Crea el sprite cuando para el personaje quieto (idle)
-        sprite = new Sprite(texturaPersonaje[0][0]);    // quieto
+        this.i=i;
+        texturaAlbondiga= new Texture(Gdx.files.internal("vida Kit.png"));
+        spriteAlbondiga=new Sprite(texturaAlbondiga);
+       if (i==0){
+           TextureRegion texturaCompleta = new TextureRegion(textura);
+           // La divide en frames de 16x32 (ver marioSprite.png)
+           TextureRegion[][] texturaPersonaje = texturaCompleta.split(448,192);
+           // Crea la animación con tiempo de 0.25 segundos entre frames.
+           animacion = new Animation(0.25f,
+
+                   texturaPersonaje[0][5],
+                   texturaPersonaje[0][4],
+                   texturaPersonaje[0][3],
+                   texturaPersonaje[0][2],
+                   texturaPersonaje[0][1]);
+           // Animación infinita
+           animacion.setPlayMode(Animation.PlayMode.LOOP);
+           // Inicia el timer que contará tiempo para saber qué frame se dibuja
+           timerAnimacion = 0;
+           // Crea el sprite cuando para el personaje quieto (idle)
+           sprite = new Sprite(texturaPersonaje[0][0]);
+
+       }
+        if (i==1){
+
+            TextureRegion texturaCompleta = new TextureRegion(textura);
+            // La divide en frames de 16x32 (ver marioSprite.png)
+            TextureRegion[][] texturaPersonaje = texturaCompleta.split(192,192);
+            // Crea la animación con tiempo de 0.25 segundos entre frames.
+            animacion = new Animation(0.25f,
+
+
+                    texturaPersonaje[0][3],
+                    texturaPersonaje[0][2],
+                    texturaPersonaje[0][1],
+                    texturaPersonaje[0][0]);
+            // Animación infinita
+            animacion.setPlayMode(Animation.PlayMode.LOOP);
+            // Inicia el timer que contará tiempo para saber qué frame se dibuja
+            timerAnimacion = 0;
+            // Crea el sprite cuando para el personaje quieto (idle)
+            sprite = new Sprite(texturaPersonaje[0][0]);
+
+        }
+        if (i==2){
+
+            TextureRegion texturaCompleta = new TextureRegion(textura);
+            // La divide en frames de 16x32 (ver marioSprite.png)
+            TextureRegion[][] texturaPersonaje = texturaCompleta.split(192,224);
+            // Crea la animación con tiempo de 0.25 segundos entre frames.
+            animacion = new Animation(0.25f,
+
+
+                    texturaPersonaje[0][3],
+                    texturaPersonaje[0][2],
+                    texturaPersonaje[0][1],
+                    texturaPersonaje[0][0]);
+            // Animación infinita
+            animacion.setPlayMode(Animation.PlayMode.LOOP);
+            // Inicia el timer que contará tiempo para saber qué frame se dibuja
+            timerAnimacion = 0;
+            // Crea el sprite cuando para el personaje quieto (idle)
+            sprite = new Sprite(texturaPersonaje[0][0]);
+
+        }
+
+          // quieto
         estadoMovimiento = EstadoMovimiento.INICIANDO;
         estadoSalto = EstadoSalto.EN_PISO;
         this.tipo=tipo;
@@ -75,8 +121,7 @@ public class Enemy {
 
     // Dibuja el personaje
     public void render (SpriteBatch batch) {
-        texturaAlbondiga= new Texture(Gdx.files.internal("vida Kit.png"));
-        spriteAlbondiga=new Sprite(texturaAlbondiga);
+
         // Dibuja el personaje dependiendo del estadoMovimiento
         timerAnimacion += Gdx.graphics.getDeltaTime();
         // Obtiene el frame que se debe mostrar (de acuerdo al timer)

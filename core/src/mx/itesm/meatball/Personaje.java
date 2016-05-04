@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class Personaje {
     public static final float VELOCIDAD_Y = -10f;   // Velocidad de caída
-    private static  float VELOCIDAD_X = 5;     // Velocidad horizontal
+    private static  float VELOCIDAD_X = 15;     // Velocidad horizontal
 
     private Sprite sprite;  // Sprite cuando no se mueve
     private Texture texturaAlbondiga;
@@ -62,6 +62,8 @@ public class Personaje {
         this.nivel=nivel;
         this.vidas=vidas;
         ataquesDispo=0;
+        texturaAlbondiga= new Texture(Gdx.files.internal("AlbondigaVida130X130.png"));
+        spriteAlbondiga=new Sprite(texturaAlbondiga);
     }
 
     // Dibuja el personaje
@@ -71,8 +73,7 @@ public class Personaje {
         // Obtiene el frame que se debe mostrar (de acuerdo al timer)
         TextureRegion region = animacion.getKeyFrame(timerAnimacion);
         batch.draw(region, sprite.getX(), sprite.getY());
-        texturaAlbondiga= new Texture(Gdx.files.internal("AlbondigaVida130X130.png"));
-        spriteAlbondiga=new Sprite(texturaAlbondiga);
+
 
         //spriteAlbondiga.setSize(5, 5);
        // Gdx.app.log("render","x="+VELOCIDAD_X);
@@ -251,9 +252,9 @@ public class Personaje {
         return ataquesDispo;
     }
     public void cambiarVelIzq(){
-      VELOCIDAD_X=-10;
+      VELOCIDAD_X=-5;
     }
     public void cambiarVelDer(){
-        VELOCIDAD_X=10;
+        VELOCIDAD_X=5;
     }
 }

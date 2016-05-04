@@ -110,6 +110,7 @@ public class pantalaIns3 implements Screen {
 
     @Override
     public void hide() {
+        dispose();
 
     }
 

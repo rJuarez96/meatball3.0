@@ -93,10 +93,19 @@ public class PantallaJuego2 implements Screen {
     private Array<Integer> lugaresY;
     // Estados del juego
     private EstadosJuego estadoJuego;
+    public int puntaje;
+
+    private Texture texturaSMu;
+    private Texture texturaMu;
+    private Boton btnMusica;
+    private Boton btnSMusica;
+
+
 
     public PantallaJuego2(Principal principal) {
 
         this.principal=principal;
+
 
         //marcador=0;
 
@@ -145,16 +154,19 @@ public class PantallaJuego2 implements Screen {
         assetManager.load("fin.jpg", Texture.class);
         assetManager.load("botonPausa.png", Texture.class);
         assetManager.load("mira mama sin botones.png",Texture.class);
-        assetManager.load("b5.png", Texture.class);
+        assetManager.load("Regresar2.png", Texture.class);
        // assetManager.load("reg.png",Texture.class);
         assetManager.load("spriteKitty.png",Texture.class);
         assetManager.load("botonsiguiente.png",Texture.class);
         assetManager.load("PugCorrer.png",Texture.class);
         assetManager.load("botonAtaque.png",Texture.class);
         assetManager.load("sprite poder Mr Kitty-min.png",Texture.class);
-        assetManager.load("sprite poder quesuno.png",Texture.class);
+        assetManager.load("sprite Vomito.png",Texture.class);
         assetManager.load("botonI.png",Texture.class);
         assetManager.load("botonD.png",Texture.class);
+        assetManager.load("botonRegresar.png",Texture.class);
+        assetManager.load("Musica.png",Texture.class);
+        assetManager.load("SMusica.png",Texture.class);
         // Se bloquea hasta que cargue todos los recursos
         assetManager.finishLoading();
 
@@ -176,13 +188,13 @@ public class PantallaJuego2 implements Screen {
         texturaPersonaje = assetManager.get("PugCorrer" +
                 ".png");
         texturaFondo=assetManager.get("sprite poder Mr Kitty-min.png");
-        texAtaAlbo=assetManager.get("sprite poder quesuno.png");
+        texAtaAlbo=assetManager.get("sprite Vomito.png");
         // Crear el personaje
         albondiga = new Personaje(texturaPersonaje,3,0);
         // Posición inicial del personaje
         albondiga.getSprite().setPosition(0,200);
         textturakitty=assetManager.get("spriteKitty.png");
-        Kitty= new Enemy(textturakitty,5);
+        Kitty= new Enemy(textturakitty,5, 0);
         Kitty.setPosicion(620, 300);
         // Crear los botones
         texturaSalto = assetManager.get("salto.png");
@@ -206,19 +218,19 @@ public class PantallaJuego2 implements Screen {
         texturaPausa=assetManager.get("mira mama sin botones.png");
         spritePausa= new Sprite(texturaPausa);
         spritePausa.setSize((int) (spritePausa.getWidth() * .5), (int) (spritePausa.getHeight() * .5));
-        spritePausa.setPosition(camara.position.x - 150, 50);
-        texturaReanudar=assetManager.get("b5.png");
+        spritePausa.setPosition(camara.position.x - 175, 50);
+        texturaReanudar=assetManager.get("Regresar2.png");
         reanudarBtn=new Boton(texturaReanudar);
         reanudarBtn.setPosicion(640, 300);
-        reanudarBtn.setSize((int) (reanudarBtn.getWidth() * .5), (int) (reanudarBtn.getHeight() * .5));
-        /*otra=assetManager.get("reg.png");
+        //reanudarBtn.setSize((int) (reanudarBtn.getWidth() * .5), (int) (reanudarBtn.getHeight() * .5));
+        otra=assetManager.get("botonRegresar.png");
         btnOtra=new Boton(otra);
-        btnOtra.setPosicion(0, 0);*/
+        btnOtra.setPosicion(0, 0);
 
 
         texturaSiguiente=assetManager.get("botonsiguiente.png");
         btnSig=new Boton(texturaSiguiente);
-        btnSig.setPosicion(1000,100);
+        btnSig.setPosicion(1000, 100);
         albondiga.setPosicion(10,50);
         texturaBtnDer=assetManager.get("botonD.png");
         texturaBtnIzq=assetManager.get("botonI.png");
@@ -229,6 +241,13 @@ public class PantallaJuego2 implements Screen {
         btnDer.setPosicion(TAM_CELDA*7,0);
 
 
+        texturaSMu=assetManager.get("SMusica.png");
+        texturaMu=assetManager.get("Musica.png");
+        btnMusica=new Boton(texturaMu);
+        btnSMusica=new Boton(texturaSMu);
+        btnMusica.setPosicion(540, 400);
+        btnSMusica.setPosicion(740,400);
+
     }
 
 
@@ -238,6 +257,8 @@ public class PantallaJuego2 implements Screen {
 
 
         // Actualizar objetos en la pantalla
+
+        Gdx.app.log("ataques", "kit albo x y" + ataquesKi.size + " " + ataquesAl.size + " " + lugaresX.size + " " + lugaresY.size);
         if (albondiga.getVidas()<=0){estadoJuego=EstadosJuego.PERDIO;}
         if (Kitty.getVidas()<=0){estadoJuego=EstadosJuego.GANO;}
 
@@ -295,8 +316,10 @@ public class PantallaJuego2 implements Screen {
                       }
 
                   }
+                    if (ataqu.getX()<=0){
 
-
+                        ataquesKi.pop();
+                    }
 
 
                 }
@@ -306,12 +329,15 @@ public class PantallaJuego2 implements Screen {
                     attack.actualizar();
 
                     if (attack.getX() + 49 >= Kitty.getX() && attack.getX() + 49 <= Kitty.getX() + 160) {
-                        if (attack.getY() + 47 >= Kitty.getY() && attack.getY() + 47 <= Kitty.getY() + 160) {
+                        if (attack.getY() + 47 >= Kitty.getY() && attack.getY() + 47 <= Kitty.getY() + 160 ) {
                             Kitty.perderVida();
 
                             ataquesAl.pop();
                         }
 
+                    }
+                    if ( attack.getX()>=1280){
+                        ataquesAl.pop();
                     }
                 }
 
@@ -340,11 +366,15 @@ public class PantallaJuego2 implements Screen {
                 break;
             case PERDIO:
                 musicaFondo.stop();
-
+                albondiga.cambiarVelDer();
 
                 borrarPantalla();
-                principal.setScreen(new pantallaMenu(principal));
-
+                //principal.setScreen(new pantallaMenu(principal));
+                batch.begin();
+                //Gdx.app.log("perdio","regresando");
+                spritePerdio.draw(batch);
+                btnOtra.render(batch);
+                batch.end();
                 //camara.position.set(0,0, 0);
 
                 /*batch.setProjectionMatrix(camara.combined);*/
@@ -363,14 +393,17 @@ public class PantallaJuego2 implements Screen {
 
                 spritePausa.draw(batch);  // Dibuja el personaje
                 reanudarBtn.render(batch);
-                reanudarBtn.setPosicion(camaraHUD.position.x,300);
-                pausaBtn.setPosicion(camaraHUD.position.x+320, 18 * TAM_CELDA);
+                reanudarBtn.setPosicion(camaraHUD.position.x - 50, 200);
+                pausaBtn.setPosicion(camaraHUD.position.x + 320, 18 * TAM_CELDA);
+                btnMusica.render(batch);
+                btnSMusica.render(batch);
                 //leerEntradaPausa();
                 //Gdx.app.log("render", "Pusado ");
                 batch.end();
                 break;
             case GANO:
                 musicaFondo.stop();
+                albondiga.cambiarVelDer();
                 borrarPantalla();
 
                 //camara.position.set(0,0, 0);
@@ -379,8 +412,11 @@ public class PantallaJuego2 implements Screen {
                 batch.begin();
 
                 spritePerdio.draw(batch);
+                btnSig.render(batch);
+
+                batch.end();
                 //Nivel++;
-                principal.setScreen(new pantallaHist2(principal));
+                //principal.setScreen(new pantallaHist2(principal));
                 break;
 
         }
@@ -423,7 +459,8 @@ public class PantallaJuego2 implements Screen {
                             capaMala.setCell(celdaX + i, celdaY + j, null);
                            // capaMala.setCell(celdaX + i, celdaY+j,celda);
                             //Gdx.app.log(":v", "tocando");
-                            albondiga.incAt();
+                            if (albondiga.getAtDis()<=3){
+                            albondiga.incAt();}
 
 
                             //albondiga.perderVida();
@@ -469,8 +506,8 @@ public class PantallaJuego2 implements Screen {
                          celda=capaMala.getCell(celdaX+i, celdaY+j);
                         capaMala.setCell(celdaX + i, celdaY + j, null);
                        // capaMala.setCell(celdaX + i, celdaY+j, celda);
-
-                        albondiga.incAt();
+                        if (albondiga.getAtDis()<=3){
+                        albondiga.incAt();}
                         celdX=celdaX+i;
                         celdY=celdaY+j;
                         lugaresX.add(celdX);
@@ -481,11 +518,12 @@ public class PantallaJuego2 implements Screen {
                 }
             }
            //Gdx.app.log("leer", "spawn =" + spawn);
-            if (spawn>=6)
+            if (spawn>=20)
             {
                 for(int m=0;m<lugaresX.size;m++){
 
-                    capaMala.setCell(lugaresX.get(m),lugaresY.get(m), celda);
+                    capaMala.setCell(lugaresX.get(m), lugaresY.get(m), celda);
+
                 }
             spawn=0;
             }
@@ -582,21 +620,6 @@ public class PantallaJuego2 implements Screen {
         }
     }
 
-    private void actualizarCamara() {
-        float posX = albondiga.getX();
-
-        //Gdx.app.log("actualizarC","x de la camara="+camara.position.x+"    post x ="+posX);
-        // Si está en la parte 'media'
-        if (posX>=320) {
-            // El personaje define el centro de la cámara
-            camara.position.set((int)posX+320, camara.position.y, 0);
-        }
-        if (camara.position.x>=8000-640) {    // Si está en la última mitad
-            // La cámara se queda a media pantalla antes del fin del mundo  :)
-            camara.position.set(8000-640, camara.position.y, 0);
-        }
-        camara.update();
-    }
 
 
 
@@ -618,6 +641,7 @@ public class PantallaJuego2 implements Screen {
 
     @Override
     public void hide() {
+        dispose();
 
     }
 
@@ -625,8 +649,8 @@ public class PantallaJuego2 implements Screen {
     public void dispose() {
         // Los assets se liberan a través del assetsManager
         AssetManager assetManager = principal.getAssetManager();
-        assetManager.unload("Albondiga.png");
-        assetManager.unload("Mapa.tmx");
+       // assetManager.unload("Albondiga.png");
+        //assetManager.unload("Mapa.tmx");
         assetManager.unload("MapaNivelBossMr.Kitty.tmx");  // Cargar info del mapa
         assetManager.unload("PugCorrer.png");    // Cargar de albondiga
         // Texturas de los botones
@@ -634,10 +658,18 @@ public class PantallaJuego2 implements Screen {
        // assetManager.unload("spriteRun.png");
         assetManager.unload("salto.png");
         assetManager.unload("fin.jpg");
-        assetManager.unload("botonAjustes.png");
+       // assetManager.unload("botonAjustes.png");
         assetManager.unload("mira mama sin botones.png");
-        assetManager.unload("b5.png");
+        assetManager.unload("Regresar2.png");
+        assetManager.unload("botonRegresar.png");
         musicaFondo.dispose();
+        ataquesAl=null;
+        ataquesKi=null;
+        batch.dispose();
+        albondiga=null;
+        Kitty=null;
+        mapa=null;
+
 
     }
     private void borrarPantalla() {
@@ -668,7 +700,6 @@ Clase utilizada para manejar los eventos de touch en la pantalla
                     // Tocó el botón saltar
                     albondiga.saltar();
 
-                    //Gdx.app.log(":v", "ataques= " + ataquesKi.size);
 
                 }
 
@@ -684,12 +715,12 @@ Clase utilizada para manejar los eventos de touch en la pantalla
                 }
 
             }
-            /*if (estadoJuego==EstadosJuego.PERDIO){
+            if (estadoJuego==EstadosJuego.PERDIO){
                 if (btnOtra.contiene(x,y)){
                     principal.setScreen(new PantallaJuego(principal));
                 }
 
-            }*/
+            }
             if (estadoJuego==EstadosJuego.GANO){
                 if (btnSig.contiene(x,y)){
                     principal.setScreen(new PantallaJuego3(principal));
@@ -716,6 +747,20 @@ Clase utilizada para manejar los eventos de touch en la pantalla
                         albondiga.decAt();
 
                     }
+                }
+
+            }
+            if (estadoJuego==EstadosJuego.PAUSADO){
+                if (btnMusica.contiene(x,y)){
+                    musicaFondo.stop();
+                    musicaFondo.play();
+                }
+
+            }
+            if (estadoJuego==EstadosJuego.PAUSADO){
+                if (btnSMusica.contiene(x,y)){
+                    musicaFondo.stop();
+
                 }
 
             }

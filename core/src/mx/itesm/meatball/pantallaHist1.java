@@ -99,6 +99,7 @@ public class pantallaHist1 implements Screen {
 
     @Override
     public void hide() {
+        dispose();
 
     }
 

@@ -67,9 +67,12 @@ public class PantallaJuego3 implements Screen {
     private Boton btnOtra;
     private Texture texturaSiguiente;
     private Boton btnSig;
-    private Texture textturakitty;
-    private Sprite spriteKitty;
-    private int puntaje;
+    private Texture texturaSMu;
+    private Texture texturaMu;
+    public int puntaje;
+
+    private Boton btnMusica;
+    private Boton btnSMusica;
     //private  int Nivel;
 
     // Estados del juego
@@ -118,16 +121,22 @@ public class PantallaJuego3 implements Screen {
         assetManager.load("MapaNivel2.tmx", TiledMap.class);  // Cargar info del mapa
         // Cargar de albondiga
         // Texturas de los botones
-        assetManager.load("PugSalto.png", Texture.class);
+        //assetManager.load("PugSalto.png", Texture.class);
         assetManager.load("PugCorrer.png", Texture.class);
         assetManager.load("salto.png", Texture.class);
         assetManager.load("fin.jpg", Texture.class);
         assetManager.load("botonPausa.png", Texture.class);
         assetManager.load("mira mama sin botones.png",Texture.class);
-        assetManager.load("b5.png", Texture.class);
-        assetManager.load("reg.png",Texture.class);
+        assetManager.load("Regresar2.png", Texture.class);
+        //assetManager.load("reg.png",Texture.class);
         assetManager.load("MrKitty copia.png",Texture.class);
         assetManager.load("botonsiguiente.png",Texture.class);
+        assetManager.load("botonRegresar.png",Texture.class);
+
+
+        assetManager.load("SMusica.png",Texture.class);
+        assetManager.load("Musica.png",Texture.class);
+
 
 
         // Se bloquea hasta que cargue todos los recursos
@@ -154,7 +163,6 @@ public class PantallaJuego3 implements Screen {
         albondiga = new Personaje(texturaPersonaje,3,1);
         // Posición inicial del personaje
         albondiga.getSprite().setPosition(0, 200);
-        albondiga.cambiarVelDer();
 
         // Crear los botones
         texturaSalto = assetManager.get("salto.png");
@@ -174,17 +182,25 @@ public class PantallaJuego3 implements Screen {
         texturaPausa=assetManager.get("mira mama sin botones.png");
         spritePausa= new Sprite(texturaPausa);
         spritePausa.setSize((int)(spritePausa.getWidth()*.5),(int)(spritePausa.getHeight()*.5));
-        spritePausa.setPosition(camara.position.x - 150, 50);
-        texturaReanudar=assetManager.get("b5.png");
+        spritePausa.setPosition(camara.position.x - 175, 50);
+        texturaReanudar=assetManager.get("Regresar2.png");
         reanudarBtn=new Boton(texturaReanudar);
-        reanudarBtn.setPosicion(640,300);
-        reanudarBtn.setSize((int) (reanudarBtn.getWidth() * .5), (int) (reanudarBtn.getHeight() * .5));
-        otra=assetManager.get("reg.png");
+        reanudarBtn.setPosicion(590,200);
+        // reanudarBtn.setSize((int) (reanudarBtn.getWidth() * .5), (int) (reanudarBtn.getHeight() * .5));
+        otra=assetManager.get("botonRegresar.png");
         btnOtra=new Boton(otra);
         btnOtra.setPosicion(0,0);
-        textturakitty=assetManager.get("MrKitty copia.png");
-        spriteKitty=new Sprite(textturakitty);
-        spriteKitty.setPosition(7400, 300);
+
+        texturaSMu=assetManager.get("SMusica.png");
+        texturaMu=assetManager.get("Musica.png");
+        btnMusica=new Boton(texturaMu);
+        btnSMusica=new Boton(texturaSMu);
+        btnMusica.setPosicion(540,400);
+        btnSMusica.setPosicion(740,400);
+
+
+
+
         texturaSiguiente=assetManager.get("botonsiguiente.png");
         btnSig=new Boton(texturaSiguiente);
         btnSig.setPosicion(1000,100);
@@ -194,16 +210,8 @@ public class PantallaJuego3 implements Screen {
 
     }
 
-    private void cargaTexturasSprites() {
-        texturaFondo=new Texture(Gdx.files.internal("2sa2.jpg"));
-        spriteFondo=new Sprite(texturaFondo);
-        texturaAlbondiga= new Texture(Gdx.files.internal("Albondiga.png"));
-        spriteAlbondiga=new Sprite(texturaAlbondiga);
-        spriteAlbondiga.setPosition(80, 10);
-        spriteAlbondiga.setSize(120, 120);
 
 
-    }
 
     @Override
     public void render(float delta) {
@@ -218,10 +226,11 @@ public class PantallaJuego3 implements Screen {
         switch (estadoJuego) {
             case JUGANDO:
                 moverPersonaje();
+                borrarPantalla();
                 actualizarCamara(); // Mover la cámara para que siga al personaje
 
                 // Dibujar
-                borrarPantalla();
+
 
                 batch.setProjectionMatrix(camara.combined);
 
@@ -233,10 +242,7 @@ public class PantallaJuego3 implements Screen {
                 albondiga.render(batch);
                 // Dibuja el personaje
                 //spritePerdio.draw(batch);
-                if (albondiga.getX()>=700){
-                    spriteKitty.draw(batch);
 
-                }
 
                 batch.end();
 
@@ -247,7 +253,7 @@ public class PantallaJuego3 implements Screen {
                 btnSalto.render(batch);
                 pausaBtn.render(batch);
                 pausaBtn.setPosicion(camaraHUD.position.x + 400, 600);
-                texto.mostrarMensaje("Puntaje"+puntaje, Principal.altoMundo / 2+200, Principal.altoMundo * 0.95f, batch);
+                texto.mostrarMensaje("Puntaje:   "+puntaje, Principal.altoMundo / 2+200, Principal.altoMundo * 0.95f, batch);
 
                 batch.end();
                 break;
@@ -256,8 +262,12 @@ public class PantallaJuego3 implements Screen {
 
 
                 borrarPantalla();
-                principal.setScreen(new pantallaMenu(principal));
-
+                //principal.setScreen(new pantallaMenu(principal));
+                batch.begin();
+                //Gdx.app.log("perdio","regresando");
+                spritePerdio.draw(batch);
+                btnOtra.render(batch);
+                batch.end();
                 //camara.position.set(0,0, 0);
 
                 /*batch.setProjectionMatrix(camara.combined);*/
@@ -267,7 +277,7 @@ public class PantallaJuego3 implements Screen {
             case PAUSADO:
 
 
-                //borrarPantalla();
+                borrarPantalla();
 
                 //camara.position.set(0,0, 0);
 
@@ -276,8 +286,10 @@ public class PantallaJuego3 implements Screen {
 
                 spritePausa.draw(batch);  // Dibuja el personaje
                 reanudarBtn.render(batch);
-                reanudarBtn.setPosicion(camaraHUD.position.x,300);
-                pausaBtn.setPosicion(camaraHUD.position.x+320, 18 * TAM_CELDA);
+                reanudarBtn.setPosicion(camaraHUD.position.x-50, 200);
+                pausaBtn.setPosicion(camaraHUD.position.x + 320, 18 * TAM_CELDA);
+                btnMusica.render(batch);
+                btnSMusica.render(batch);
                 //leerEntradaPausa();
                 //Gdx.app.log("render", "Pusado ");
                 batch.end();
@@ -294,7 +306,7 @@ public class PantallaJuego3 implements Screen {
                 spritePerdio.draw(batch);
                 btnSig.render(batch);
                 //Nivel++;
-                //principal.setScreen(new PantallaJuego5(principal));
+                //principal.setScreen(new PantallaJuego(principal));
                 batch.end();
                 break;
 
@@ -305,31 +317,13 @@ public class PantallaJuego3 implements Screen {
             camara.unproject(coordenadas);//transforma coordenada
             float touchX = coordenadas.x;
             float touchY = coordenadas.y;
-            Gdx.app.log("leer","touch ="+touchX+" x de la pausa "+reanudarBtn.getX() );
-            if (touchX>=reanudarBtn.getX() && touchX<=reanudarBtn.getX()+reanudarBtn.getWidth() && touchY>=reanudarBtn.getY() && touchY<=reanudarBtn.getY()+reanudarBtn.getHeight()){
-                //Gdx.app.log("leer","touch entro" );
-                estadoJuego=EstadosJuego.JUGANDO;
-            }
+
+
 
         }
     }
 
-    private void leerEntrada() {
 
-        if (Gdx.input.justTouched()==true) {
-            Vector3 coordenadas = new Vector3();
-            coordenadas.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camaraHUD.unproject(coordenadas);//transforma coordenada
-            float touchX = coordenadas.x;
-            float touchY = coordenadas.y;
-            //Gdx.app.log("leer","touch ="+touchX+" x de la pausa "+pausaBtn.getX() );
-            if (touchX>=pausaBtn.getX() && touchX<=pausaBtn.getX()+pausaBtn.getWidth() && touchY>=pausaBtn.getY() && touchY<=pausaBtn.getY()+pausaBtn.getHeight()){
-                Gdx.app.log("leer","touch entro" );
-                estadoJuego=EstadosJuego.PAUSADO;
-            }
-
-        }
-    }
 
     private void moverPersonaje() {
         // Prueba caída libre inicial o movimiento horizontal
@@ -344,12 +338,15 @@ public class PantallaJuego3 implements Screen {
                 TiledMapTileLayer capaMala = (TiledMapTileLayer) mapa.getLayers().get("ItemsMalos");
 
 
-                for(int i=0;i<4;i++){
-                    for (int j=0;j<4;j++){
+                for(int i=0;i<5;i++){
+                    for (int j=0;j<5;j++){
                         if (capaMala.getCell(celdaX+i, celdaY+j)!=null){
-                            capaMala.setCell(celdaX+i, celdaY+j, null);
+                            capaMala.setCell(celdaX + i, celdaY + j, null);
                             albondiga.perderVida();
-                            puntaje-=100;
+                            if (puntaje>0) {
+
+                                puntaje -= 100;
+                            }
                         }
                     }
                 }
@@ -369,10 +366,7 @@ public class PantallaJuego3 implements Screen {
                 }
 
                 break;
-            case MOV_DERECHA:       // Se mueve horizontal
-            case MOV_IZQUIERDA:
-                albondiga.actualizar();
-                break;
+
         }
         // Prueba si debe caer por llegar a un espacio vacío
         if ( albondiga.getEstadoMovimiento()!= Personaje.EstadoMovimiento.INICIANDO
@@ -385,21 +379,24 @@ public class PantallaJuego3 implements Screen {
             TiledMapTileLayer capaMala = (TiledMapTileLayer) mapa.getLayers().get("ItemsMalos");
 
 
-            for(int i=0;i<4;i++){
-                for (int j=0;j<4;j++){
+            for(int i=0;i<5;i++){
+                for (int j=0;j<5;j++){
                     if (capaMala.getCell(celdaX+i, celdaY+j)!=null){
                         capaMala.setCell(celdaX+i, celdaY+j, null);
                         albondiga.perderVida();
-                        puntaje-=100;
+                        if (puntaje>0) {
+
+                            puntaje -= 100;
+                        }
                     }
                 }
             }
             TiledMapTileLayer capaBuena  = (TiledMapTileLayer) mapa.getLayers().get("ItemsBuenos");
 
 
-            for(int i=0;i<4;i++){
-                for (int j=0;j<4;j++){
-                   if (capaBuena.getCell(celdaX+i, celdaY+j)!=null){
+            for(int i=0;i<5;i++){
+                for (int j=0;j<5;j++){
+                    if (capaBuena.getCell(celdaX+i, celdaY+j)!=null){
                         capaBuena.setCell(celdaX+i, celdaY+j, null);
                         albondiga.ganarVida();
                         puntaje+=100;
@@ -470,6 +467,7 @@ public class PantallaJuego3 implements Screen {
 
     @Override
     public void hide() {
+        dispose();
 
     }
 
@@ -477,20 +475,24 @@ public class PantallaJuego3 implements Screen {
     public void dispose() {
         // Los assets se liberan a través del assetsManager
         AssetManager assetManager = principal.getAssetManager();
-        assetManager.unload("Albondiga.png");
-        assetManager.unload("Mapa.tmx");
-        assetManager.unload("MapaAlbondiRun_Nivel1.tmx");  // Cargar info del mapa
+
+        //assetManager.unload("Mapa.tmx");
+        assetManager.unload("MapaNivel2.tmx");  // Cargar info del mapa
         assetManager.unload("PugCorrer.png");    // Cargar de albondiga
         // Texturas de los botones
-        assetManager.unload("PugSalto.png");
-        assetManager.unload("PugCorrer.png");
+        assetManager.unload("botonPausa.png");
+        // assetManager.unload("PugCorrer.png");
         assetManager.unload("salto.png");
         assetManager.unload("fin.jpg");
-        assetManager.unload("botonAjustes.png");
+        // assetManager.unload("botonAjustes.png");
         assetManager.unload("mira mama sin botones.png");
-        assetManager.unload("b5.png");
+        assetManager.unload("Regresar2.png");
+        assetManager.unload("botonsiguiente.png");
+        assetManager.unload("botonRegresar.png");
+        albondiga=null;
+        mapa=null;
         musicaFondo.dispose();
-
+        batch.dispose();
     }
     private void borrarPantalla() {
         Gdx.gl.glClearColor(0.42f, 0.55f, 1, 1);    // r, g, b, alpha
@@ -541,7 +543,21 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             }
             if (estadoJuego==EstadosJuego.GANO){
                 if (btnSig.contiene(x,y)){
-                    principal.setScreen(new PantallaJuego5(principal));
+                    principal.setScreen(new PantallaJuego4(principal));
+                }
+
+            }
+            if (estadoJuego==EstadosJuego.PAUSADO){
+                if (btnMusica.contiene(x,y)){
+                    musicaFondo.stop();
+                    musicaFondo.play();
+                }
+
+            }
+            if (estadoJuego==EstadosJuego.PAUSADO){
+                if (btnSMusica.contiene(x,y)){
+                    musicaFondo.stop();
+
                 }
 
             }
@@ -559,6 +575,10 @@ Clase utilizada para manejar los eventos de touch en la pantalla
             x = coordenadas.x;
             y = coordenadas.y;
         }
+
+    }
+    public int getPun(){
+        return puntaje;
 
     }
 

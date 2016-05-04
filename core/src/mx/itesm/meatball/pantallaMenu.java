@@ -116,16 +116,19 @@ public class pantallaMenu implements Screen {
             }
                 //toco play?
             if (touchX>=spriteTexturaPlay.getX() && touchX<=spriteTexturaPlay.getX()+spriteTexturaPlay.getWidth() && touchY>=spriteTexturaPlay.getY() && touchY<=spriteTexturaPlay.getY()+spriteTexturaPlay.getHeight()){
-                principal.setScreen(new pantallaHist1(principal));
                 musicaFondo.stop();
+                principal.setScreen(new pantallaHist1(principal));
+
             }
             if (touchX>=spriteAcercaDe.getX() && touchX<=spriteAcercaDe.getX()+spriteAcercaDe.getWidth() && touchY>=spriteAcercaDe.getY() && touchY<=spriteAcercaDe.getY()+spriteAcercaDe.getHeight()){
-                principal.setScreen(new PantallaAcercaDe(principal));
                 musicaFondo.stop();
+                principal.setScreen(new PantallaAcercaDe(principal));
+
             }
             if (touchX>=spriteBtnIns.getX() && touchX<=spriteBtnIns.getX()+spriteBtnIns.getWidth() && touchY>=spriteBtnIns.getY() && touchY<=spriteBtnIns.getY()+spriteBtnIns.getHeight()){
-                principal.setScreen(new pantallaIns(principal,1));
                 musicaFondo.stop();
+                principal.setScreen(new pantallaIns(principal,1));
+
             }
 
 
@@ -150,6 +153,7 @@ public class pantallaMenu implements Screen {
 
     @Override
     public void hide() {
+        dispose();
 
     }
 

@@ -34,9 +34,9 @@ public class PantallaAcercaDe implements Screen {
 
         texturaFondo=new Texture(Gdx.files.internal("acerca de pantalla.png"));
         spriteFondo=new Sprite(texturaFondo);
-        texturaBtnSalir=new Texture(Gdx.files.internal("reg.png"));
+        texturaBtnSalir=new Texture(Gdx.files.internal("botonRegresar.png"));
         spriteBtnSalir=new Sprite(texturaBtnSalir);
-        spriteBtnSalir.setPosition(0,0);
+        spriteBtnSalir.setPosition(0,100);
     }
 
     @Override

@@ -85,7 +85,7 @@
    </animation>
   </tile>
  </tileset>
- <imagelayer name="Fondo" opacity="0.63" offsetx="-3" offsety="-2">
+ <imagelayer name="Fondo" visible="0" opacity="0.63" offsetx="-3" offsety="-2">
   <image source="Fondo/No/FONDO ALARGADO Y FIX3.jpg"/>
  </imagelayer>
  <layer name="Calle" width="250" height="23">

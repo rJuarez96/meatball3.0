@@ -293,7 +293,7 @@ public class PantallaJuego implements Screen {
                 //Gdx.app.log("perdio","regresando");
                 perdioO.draw(batch);
                 btnOtra.render(batch);
-                btnOtra.setPosicion(100,520);
+                btnOtra.setPosicion(100,550);
                 batch.end();
                 //camara.position.set(0,0, 0);
 

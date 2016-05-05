@@ -9,25 +9,26 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * Created by Roberto on 21/04/2016.
  */
 public class Ataque {
-    private float VELOCIDAD_X;     // Velocidad horizontal
+    private float VELOCIDAD_X;
 
-    private Sprite sprite;  // Sprite cuando no se mueve
+    private Sprite sprite;
+
     private Texture texturaAlbondiga;
     private Sprite spriteAlbondiga;
-    // Animación
-    private Animation animacion;    // Caminando
-    private float timerAnimacion;   // tiempo para calcular el frame
+
+    private Animation animacion;
+    private float timerAnimacion;
     private int tipoA;
 
     public Ataque(Texture att, float x, float y,float vel,int tipo) {
         VELOCIDAD_X=vel;
       TextureRegion texturaCompleta = new TextureRegion(att);
-        // La divide en frames de 16x32 (ver marioSprite.png)
+
         this.tipoA=tipo;
         if (tipoA==1) {
             TextureRegion[][] texturaPersonaje = texturaCompleta.split(98, 94);
             Gdx.app.log("kitt","ata");
-            // Crea la animación con tiempo de 0.25 segundos entre frames.
+
             animacion = new Animation(0.25f,
 
                     texturaPersonaje[0][15],
@@ -47,11 +48,11 @@ public class Ataque {
                     texturaPersonaje[0][1]);
 
             sprite = new Sprite(texturaPersonaje[0][0]);
-            // Animación infinita
+
         }
         if (tipoA==0) {
             TextureRegion[][] texturaPersonaje = texturaCompleta.split(125, 64);
-            // Crea la animación con tiempo de 0.25 segundos entre frames.
+
             animacion = new Animation(0.25f,
 
                     texturaPersonaje[0][2],
@@ -59,11 +60,11 @@ public class Ataque {
                     texturaPersonaje[0][0]);
 
             sprite = new Sprite(texturaPersonaje[0][0]);
-            // Animación infinita
+
         }
         if (tipoA==2) {
             TextureRegion[][] texturaPersonaje = texturaCompleta.split(94, 64);
-            // Crea la animación con tiempo de 0.25 segundos entre frames.
+
             animacion = new Animation(0.25f,
                     texturaPersonaje[0][7],
                     texturaPersonaje[0][6],
@@ -75,11 +76,11 @@ public class Ataque {
                     texturaPersonaje[0][0]);
 
             sprite = new Sprite(texturaPersonaje[0][0]);
-            // Animación infinita
+
         }
         if (tipoA==3) {
             TextureRegion[][] texturaPersonaje = texturaCompleta.split(120, 128);
-            // Crea la animación con tiempo de 0.25 segundos entre frames.
+
             animacion = new Animation(0.25f,
 
                     texturaPersonaje[0][2],
@@ -87,49 +88,44 @@ public class Ataque {
                     texturaPersonaje[0][0]);
 
             sprite = new Sprite(texturaPersonaje[0][0]);
-            // Animación infinita
+
         }
         animacion.setPlayMode(Animation.PlayMode.LOOP);
-        // Inicia el timer que contará tiempo para saber qué frame se dibuja
+
         timerAnimacion = 0;
-        // Crea el sprite cuando para el personaje quieto (idle)
-            // quieto
+
         sprite.setPosition(x,y);
 
 
 
     }
     public void render (SpriteBatch batch) {
-        // Dibuja el personaje dependiendo del estadoMovimiento
+
         timerAnimacion += Gdx.graphics.getDeltaTime();
-        // Obtiene el frame que se debe mostrar (de acuerdo al timer)
+
         TextureRegion region = animacion.getKeyFrame(timerAnimacion);
         batch.draw(region, sprite.getX(), sprite.getY());
 
 
-        //spriteAlbondiga.setSize(5, 5);
 
-        // Gdx.app.log("render","x="+getX()+" vidas = "+vidas);
 
 
 
     }
     public void actualizar() {
-        // Ejecutar movimiento horizontal
+
         float nuevaX = sprite.getX();
         nuevaX += VELOCIDAD_X;
         sprite.setX(nuevaX);
 
         
-       /* if (nuevaX<=PantallaJuego.ANCHO_MAPA-sprite.getWidth()) {
-            sprite.setX(nuevaX);
-        }*/
+
     }
     public Sprite getSprite() {
         return sprite;
     }
 
-    // Accesores para la posición
+
     public float getX() {
         return sprite.getX();
     }

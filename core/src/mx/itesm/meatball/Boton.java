@@ -10,8 +10,8 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Boton
 {
-    private Sprite sprite;              // Imagen
-    private Rectangle rectColision;     // Rectangulo para verificar colisiones o touch
+    private Sprite sprite;
+    private Rectangle rectColision;
 
     public Boton(Texture textura) {
         sprite = new Sprite(textura);
